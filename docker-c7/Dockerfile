@@ -11,9 +11,12 @@ RUN yummy yum-priorities
 RUN yummy zip
 
 # CVMFS (for SUM tests only; install before adding other repos to ensure we have the latest version)
+# Install cvmfs-x509-helper for access to secure CVMFS repositories
 RUN yummy https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm \
+                   http://ecsft.cern.ch/dist/cvmfs/cvmfs-contrib-release/cvmfs-contrib-release-1.4-1.noarch.rpm \
                    https://ecsft.cern.ch/dist/cvmfs/cvmfs-config-egi/cvmfs-config-egi-2.0-1.el7.centos.noarch.rpm && \
-    yummy cvmfs-2.5.2-1.el7.x86_64
+    yummy cvmfs-2.5.2-1.el7.x86_64 && \
+    yummy cvmfs-x509-helper
 
 # EPEL
 RUN yummy https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
